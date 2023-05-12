@@ -1,0 +1,160 @@
+CREATE DATABASE IF NOT EXISTS TSWProject;
+USE TSWProject;
+
+/*
+  TABLE: Amministratore
+*/
+CREATE TABLE IF NOT EXISTS Amministratore
+(
+  IDAdmin INT NOT NULL AUTO_INCREMENT UNIQUE,
+  Nome VARCHAR(32) NOT NULL,
+  Cognome VARCHAR(32) NOT NULL,
+  Email VARCHAR(128)  NOT NULL UNIQUE,
+  Password VARCHAR(32) NOT NULL,
+  DataNascita DATE,
+  Indirizzo VARCHAR(64) NOT NULL,
+  PRIMARY KEY(IDAdmin)
+);
+
+/*
+  TABLE: Gioco
+*/
+CREATE TABLE IF NOT EXISTS Gioco
+(
+  IDGioco INT NOT NULL AUTO_INCREMENT UNIQUE,
+  Nome VARCHAR(32) NOT NULL,
+  Descrizione VARCHAR(2000),
+  Prezzo DOUBLE NOT NULL,
+  DataRilascio DATE NOT NULL,
+  EtaMinima INT,
+  IDAdmin INT NOT NULL,
+  PRIMARY KEY(IDGioco),
+  FOREIGN KEY (IDAdmin) REFERENCES Amministratore(IDAdmin)
+);
+
+/*
+  TABLE: Anteprima
+*/
+CREATE TABLE IF NOT EXISTS Anteprima
+(
+  IDAnteprima INT NOT NULL AUTO_INCREMENT UNIQUE,
+  IDGioco INT NOT NULL,
+  Location VARCHAR(256),
+  Url VARCHAR(256),
+  PRIMARY KEY(IDAnteprima),
+  FOREIGN KEY (IDGioco) REFERENCES Gioco(IDGioco)
+);
+
+/*
+  TABLE: Console
+*/
+CREATE TABLE IF NOT EXISTS Console
+(
+  IDConsole INT NOT NULL AUTO_INCREMENT UNIQUE,
+  Nome VARCHAR(32) NOT NULL,
+  Descrizione VARCHAR(2000),
+  PRIMARY KEY(IDConsole)
+);
+
+/*
+  TABLE: EsecuzioneGioco
+*/
+CREATE TABLE IF NOT EXISTS EsecuzioneGioco
+(
+  IDConsole INT NOT NULL,
+  IDGioco INT NOT NULL,
+  FOREIGN KEY (IDConsole) REFERENCES Console(IDConsole),
+  FOREIGN KEY (IDGioco) REFERENCES Gioco(IDGioco)
+);
+
+/*
+  TABLE: Categoria
+*/
+CREATE TABLE IF NOT EXISTS Categoria
+(
+  IDCategoria INT NOT NULL AUTO_INCREMENT UNIQUE,
+  Nome VARCHAR(32) NOT NULL,
+  Descrizione VARCHAR(2000),
+  PRIMARY KEY(IDCategoria)
+);
+
+/*
+  TABLE: CategoriaGioco
+*/
+CREATE TABLE IF NOT EXISTS CategoriaGioco
+(
+  IDCategoria INT NOT NULL,
+  IDGioco INT NOT NULL,
+  FOREIGN KEY (IDCategoria) REFERENCES Categoria(IDCategoria),
+  FOREIGN KEY (IDGioco) REFERENCES Gioco(IDGioco)
+);
+
+/*
+  TABLE: Utente
+*/
+CREATE TABLE IF NOT EXISTS Utente
+(
+  IDUtente INT NOT NULL AUTO_INCREMENT UNIQUE,
+  Nome VARCHAR(32) NOT NULL,
+  Cognome VARCHAR(32) NOT NULL,
+  Email VARCHAR(128)  NOT NULL UNIQUE,
+  Password VARCHAR(32) NOT NULL,
+  DataNascita DATE,
+  Indirizzo VARCHAR(64) NOT NULL,
+  PRIMARY KEY(IDUtente)
+);
+
+/*
+  TABLE: Recensione
+*/
+CREATE TABLE IF NOT EXISTS Recensione
+(
+  IDRecensione INT NOT NULL AUTO_INCREMENT UNIQUE,
+  IDUtente INT NOT NULL,
+  IDGioco INT NOT NULL,
+  Testo VARCHAR(2000),
+  PRIMARY KEY(IDRecensione),
+  FOREIGN KEY (IDUtente) REFERENCES Utente(IDUtente),
+  FOREIGN KEY (IDGioco) REFERENCES Gioco(IDGioco)
+);
+
+/*
+  TABLE: Acquisto
+*/
+CREATE TABLE IF NOT EXISTS Acquisto
+(
+  IDAcquisto INT NOT NULL AUTO_INCREMENT UNIQUE,
+  IDUtente INT NOT NULL,
+  IDGioco INT NOT NULL,
+  Quantita INT NOT NULL,
+  DataAcquisto DATE NOT NULL,
+  OrarioAcquisto DATE NOT NULL,
+  PRIMARY KEY(IDAcquisto),
+  FOREIGN KEY (IDUtente) REFERENCES Utente(IDUtente),
+  FOREIGN KEY (IDGioco) REFERENCES Gioco(IDGioco)
+);
+
+/*
+  TABLE: Carrello
+*/
+CREATE TABLE IF NOT EXISTS Carrello
+(
+  IDCarrello INT NOT NULL AUTO_INCREMENT UNIQUE,
+  IDAcquisto INT NOT NULL,
+  PRIMARY KEY(IDCarrello),
+  FOREIGN KEY(IDAcquisto) REFERENCES Acquisto(IDAcquisto)
+);
+
+/*
+  TABLE: Pagamento
+*/
+CREATE TABLE IF NOT EXISTS Pagamento
+(
+  IDPagamento INT NOT NULL AUTO_INCREMENT UNIQUE,
+  IDUtente INT NOT NULL,
+  Ammonto DOUBLE NOT NULL,
+  DataPagamento DATE NOT NULL,
+  OrarioPagamento DATE NOT NULL,
+  PRIMARY KEY(IDPagamento),
+  FOREIGN KEY (IDUtente) REFERENCES Utente(IDUtente)
+);

@@ -1,0 +1,28 @@
+Attributi Entità 
+
+LEGENDA *Primary Key, _Secondary Key
+
+
+Amministratore(*IDAdmin, Nome, Cognome, Email, Password, DataNascita, Indirizzo)
+
+Gioco(*IDG, Nome, Descrizione, Prezzo, DataRilascio, EtaMinima, _Admin)
+
+Anteprima(*IDAnt, Location, Url, _IDGioco)
+
+Console(*IDCon, Nome, Descrizione)
+
+EsecuzioneGioco(_IDConsole,_IDGioco)
+
+Categoria(*IDCat, Nome, Descrizione)
+
+CategoriaGioco(_IDCategoria,_IDGioco)
+
+Utente(*IDAdmin, Nome, Cognome, Email, Password, DataNascita, Indirizzo)
+
+Recensione(*IDRec, _IDUtente, _IDGioco, Valutazione, Testo)
+
+Acquisto(*IDAcq, _IDUtente, _IDGioco, Quantita, DataAcquisto, OrarioAcquisto)
+
+Carrello(*IDCar, _IDAcquisto)
+
+Pagamento(*IDPag, _IDUtente, Ammonto, DataPagamento, OrarioPagamento)
