@@ -28,22 +28,10 @@ CREATE TABLE IF NOT EXISTS Gioco
   Prezzo DOUBLE NOT NULL,
   DataRilascio DATE NOT NULL,
   EtaMinima INT,
+  PreviewUrl VARCHAR(256),
   IDAdmin INT NOT NULL,
   PRIMARY KEY(IDGioco),
   FOREIGN KEY (IDAdmin) REFERENCES Amministratore(IDAdmin)
-);
-
-/*
-  TABLE: Anteprima
-*/
-CREATE TABLE IF NOT EXISTS Anteprima
-(
-  IDAnteprima INT NOT NULL AUTO_INCREMENT UNIQUE,
-  IDGioco INT NOT NULL,
-  Location VARCHAR(256),
-  Url VARCHAR(256),
-  PRIMARY KEY(IDAnteprima),
-  FOREIGN KEY (IDGioco) REFERENCES Gioco(IDGioco)
 );
 
 /*
@@ -106,7 +94,7 @@ CREATE TABLE IF NOT EXISTS Utente
 );
 
 /*
-  TABLE: Recensione
+  TABLE: Recensione (?)
 */
 CREATE TABLE IF NOT EXISTS Recensione
 (
