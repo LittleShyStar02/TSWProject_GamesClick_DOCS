@@ -8,12 +8,7 @@ USE TSWProject;
 CREATE TABLE IF NOT EXISTS Amministratore
 (
   IDAdmin INT NOT NULL AUTO_INCREMENT UNIQUE,
-  Nome VARCHAR(32) NOT NULL,
-  Cognome VARCHAR(32) NOT NULL,
   Email VARCHAR(128)  NOT NULL UNIQUE,
-  Password VARCHAR(32) NOT NULL,
-  DataNascita DATE,
-  Indirizzo VARCHAR(64) NOT NULL,
   PRIMARY KEY(IDAdmin)
 );
 
@@ -94,7 +89,11 @@ CREATE TABLE IF NOT EXISTS Utente
 );
 
 /*
+<<<<<<< HEAD
+  TABLE: Recensione (Sospesa)
+=======
   TABLE: Recensione (?)
+>>>>>>> 4e1d7381072a156e51c307e571eee03d376023a5
 */
 CREATE TABLE IF NOT EXISTS Recensione
 (
