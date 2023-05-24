@@ -15,7 +15,7 @@ Categoria(*IDCat, Nome, Descrizione)
 
 CategoriaGioco(_IDCategoria,_IDGioco)
 
-Utente(*IDAdmin, Nome, Cognome, Email, Password, DataNascita, Indirizzo)
+Utente(*IDUtente, Nome, Cognome, Email, Password, DataNascita, Indirizzo)
 
 Recensione(*IDRec, _IDUtente, _IDGioco, Valutazione, Testo) (?)
 
