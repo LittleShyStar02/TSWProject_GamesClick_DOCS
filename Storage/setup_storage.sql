@@ -89,11 +89,20 @@ CREATE TABLE IF NOT EXISTS Utente
 );
 
 /*
-<<<<<<< HEAD
-  TABLE: Recensione (Sospesa)
-=======
-  TABLE: Recensione (?)
->>>>>>> 4e1d7381072a156e51c307e571eee03d376023a5
+  TABLE: Metodo
+*/
+CREATE TABLE IF NOT EXISTS Metodo
+(
+  IDMetodo INT NOT NULL AUTO_INCREMENT UNIQUE,
+  Nome VARCHAR(32) NOT NULL,
+  Info VARCHAR(256) NOT NULL,
+  IDUtente INT NOT NULL,
+  PRIMARY KEY(IDUtente),
+  FOREIGN KEY (IDUtente) REFERENCES Utente(IDUtente)
+);
+
+/*
+  TABLE: Recensione
 */
 CREATE TABLE IF NOT EXISTS Recensione
 (
@@ -143,6 +152,8 @@ CREATE TABLE IF NOT EXISTS Pagamento
   Ammonto DOUBLE NOT NULL,
   DataPagamento DATE NOT NULL,
   OrarioPagamento DATE NOT NULL,
+  IDMetodo INT NOT NULL,
   PRIMARY KEY(IDPagamento),
-  FOREIGN KEY (IDUtente) REFERENCES Utente(IDUtente)
+  FOREIGN KEY (IDUtente) REFERENCES Utente(IDUtente),
+  FOREIGN KEY (IDMetodo) REFERENCES Metodo(IDMetodo)
 );
