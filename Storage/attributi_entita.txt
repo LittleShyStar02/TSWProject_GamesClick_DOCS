@@ -17,7 +17,9 @@ CategoriaGioco(_IDCategoria,_IDGioco)
 
 Utente(*IDUtente, Nome, Cognome, Email, Password, DataNascita, Indirizzo)
 
-Recensione(*IDRec, _IDUtente, _IDGioco, Valutazione, Testo) (?)
+Metodo(*IDMetodo, Nome, Info, _IDUtente)
+
+Recensione(*IDRec, _IDUtente, _IDGioco, Valutazione, Testo)
 
 Acquisto(*IDAcq, _IDUtente, _IDGioco, Quantita, DataAcquisto, OrarioAcquisto)
 
