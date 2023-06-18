@@ -123,37 +123,14 @@ CREATE TABLE IF NOT EXISTS Acquisto
   IDAcquisto INT NOT NULL AUTO_INCREMENT UNIQUE,
   IDUtente INT NOT NULL,
   IDGioco INT NOT NULL,
+  IDMetodo INT NOT NULL,
   Quantita INT NOT NULL,
   DataAcquisto DATE NOT NULL,
-  OrarioAcquisto DATE NOT NULL,
   PRIMARY KEY(IDAcquisto),
   FOREIGN KEY (IDUtente) REFERENCES Utente(IDUtente),
-  FOREIGN KEY (IDGioco) REFERENCES Gioco(IDGioco)
-);
-
-/*
-  TABLE: Carrello
-*/
-CREATE TABLE IF NOT EXISTS Carrello
-(
-  IDCarrello INT NOT NULL AUTO_INCREMENT UNIQUE,
-  IDAcquisto INT NOT NULL,
-  PRIMARY KEY(IDCarrello),
-  FOREIGN KEY(IDAcquisto) REFERENCES Acquisto(IDAcquisto)
-);
-
-/*
-  TABLE: Pagamento
-*/
-CREATE TABLE IF NOT EXISTS Pagamento
-(
-  IDPagamento INT NOT NULL AUTO_INCREMENT UNIQUE,
-  IDUtente INT NOT NULL,
-  Ammonto DOUBLE NOT NULL,
-  DataPagamento DATE NOT NULL,
-  OrarioPagamento DATE NOT NULL,
-  IDMetodo INT NOT NULL,
-  PRIMARY KEY(IDPagamento),
-  FOREIGN KEY (IDUtente) REFERENCES Utente(IDUtente),
+  FOREIGN KEY (IDGioco) REFERENCES Gioco(IDGioco),
   FOREIGN KEY (IDMetodo) REFERENCES Metodo(IDMetodo)
 );
+
+INSERT INTO Utente(Nome,Cognome,Email,Password,DataNascita,Indirizzo) VALUES("Vincenzo","Cutolo","vincenzocutolo80@gmail.com","Provola44","2002-05-30","Provola44");
+INSERT INTO Amministratore(Email) VALUES("vincenzocutolo80@gmail.com");
